@@ -76,6 +76,7 @@ Three types of Naive Bayes classifiers are trained on the dataset:
 
 In addition to a regular train-test split, **k-fold cross-validation** is employed to provide a more robust evaluation of the models. The dataset is split into k (e.g., 5) subsets, and the model is trained and tested k times on different subsets to ensure it generalizes well.
 
+
 #### 5. Visualizations
 
 - **Sentiment Distribution**: A bar chart shows the distribution of positive and negative sentiments in the dataset.
@@ -88,6 +89,12 @@ The accuracy of each model on the test set and after k-fold cross-validation is 
 - **Gaussian Naive Bayes**: Around 71% accuracy
 - **Multinomial Naive Bayes**: Around 83% accuracy
 - **Bernoulli Naive Bayes**: Around 83.5% accuracy
+
+- Why GaussianNB performs poorly: GaussianNB is based on the assumption that the features follow a normal distribution, but in text classification tasks, the features (word counts or binary presence/absence) do not follow a normal distribution. This results in lower accuracy and greater variation in performance during cross-validation. The model is not well-suited for this particular type of data.
+
+- Why MultinomialNB performs better: MultinomialNB assumes that features represent discrete counts (such as word frequencies), which aligns perfectly with the bag-of-words or term frequency model typically used in text classification tasks. This alignment between model assumption and data structure results in higher accuracy and more stable performance during cross-validation.
+
+- Why BernoulliNB performs similarly to MultinomialNB: BernoulliNB expects binary features, where each word is either present or absent in a document. Since the data can easily be interpreted in this manner (by binarizing the presence/absence of words), this model also performs well, similar to MultinomialNB, but with slightly more variability.
 
 These results show that **Multinomial** and **Bernoulli Naive Bayes** are particularly well-suited for this type of text data.
 
